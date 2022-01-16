@@ -1,0 +1,155 @@
+﻿@page "/nuevaPelicula"
+
+@inject HttpClient Http
+@using CarteleraLibrary.Models
+@inject CarteleraLibrary.Controllers.PeliculasService peliculasService
+@inject Radzen.DialogService dialogService
+@inject NotificationService NotificationService
+
+   <div class="row my-4">
+    <div class="col-md-12">
+    <RadzenNotification />
+
+            <RadzenTemplateForm TItem="PeliculaDto" Data=@pelicula Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+                <RadzenFieldset Text="Datos de la Pelicula">
+                    <div class="row mb-5">
+                        <div class="col-md-4">
+                            <RadzenLabel Text="Titulo" />
+                        </div>
+                        <div class="col">
+                            <RadzenTextBox style="display: block" Change=@(args => OnChangeTitulo(args))  Name="Titulo" @bind-Value=@pelicula.Titulo Class="w-100" />
+                            <RadzenRequiredValidator Component="Titulo" Text="Titulo es requerido" Popup=@popup Style="position: absolute"/>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-4">
+                            <RadzenLabel Text="Descripcion" />
+                        </div>
+                        <div class="col">
+                            <RadzenTextArea Rows="4" MaxLength="4000" style="display: block" Name="Descripcion" @bind-Value=@pelicula.Descripcion  Class="w-100" />
+                            <RadzenRequiredValidator Component="Descripcion" Text="Descripción es requerido" Popup=@popup Style="position: absolute"/>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-4">
+                            <RadzenLabel Text="Valoracion" />
+                        </div>
+                        <div class="col">
+                        <RadzenRating Change=@(args => OnChange(args)) Disabled="false" ReadOnly="false" Stars="10"  Value="@valoracion"/> 
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+    <div class="col-md-12 text-right">
+        <RadzenButton Click="@((args) => dialogService.Close(false))" ButtonStyle="ButtonStyle.Secondary" Text="Cancel" Style="width: 120px" Class="mr-1" />
+         <RadzenButton ButtonType="ButtonType.Submit" Text="Guardar"  Style="width: 120px" Class="mr-1"></RadzenButton>
+    </div>
+</div>
+                   
+                </RadzenFieldset>
+            </RadzenTemplateForm>
+            </div>
+            </div>
+            <div class="row my-4">
+    <div class="col-md-12">
+        <RadzenCard title="Peliculas coincidentes">
+            <h1>Peliculas coincidentes</h1
+            <RadzenDataList WrapItems="true" AllowPaging="false" Data="@peliculasCoincidentes" TItem="PeliculaApiDto">
+        <Template Context="pelicula">
+            <RadzenCard   Style="width:300px;">
+                  <RadzenImage Click=@(args => AsociarPelicula(@pelicula)) Path=@pelicula.FullPoster() Class="rounded-circle float-left mr-3" Style="width: 80px; height: 80px;" />
+                <div class="d-flex flex-row align-items-center">
+                    <div>
+                        <h4 class="mb-0">@(pelicula.original_title)</h4>
+          
+                        <div style="font-size: .8em">@(pelicula.id)</div>
+                    </div>
+                </div>
+                <hr style="border: none; background-color: rgba(0,0,0,.08); height: 1px; margin: 1rem 0;" />
+                <div class="row">
+<RadzenRating Disabled="false" ReadOnly="true" Stars="10"  Value="@pelicula.Puntuacion()"/>       
+                </div>
+            </RadzenCard>
+        </Template>
+    </RadzenDataList>
+    <RadzenPager ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat" Count="count" PageSize="@pageSize" PageNumbersCount="10" PageChanged="@PageChanged" />
+        </RadzenCard>
+    </div>
+        </div>
+
+
+@code {
+    string pagingSummaryFormat = "Displaying page {0} of {1} (total {2} records)";
+    int pageSize = 6;
+    int count;
+    int valoracion = 0;
+    PeliculaDto pelicula ;
+    bool popup;
+    List<PeliculaApiDto>? peliculasCoincidentes;
+    protected override async void OnInitialized()
+    {
+        pelicula = new PeliculaDto();
+        popup = true;
+    }
+
+    async void OnSubmit()
+    {
+        pelicula.PuntuacionPromedio = valoracion;
+        pelicula = await peliculasService.CreatePelicula(pelicula,1);
+        ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Registro Exitoso", Detail = "Nueva pelicula guardada con el identificador "+pelicula.Id.ToString(), Duration = 4000 });
+        pelicula = new PeliculaDto();
+        valoracion = 0;
+        StateHasChanged();
+        dialogService.Close(false);
+
+    }
+
+    void OnChange(int value)
+    {
+        valoracion=value;
+    }
+
+    async void OnChangeTitulo(string value)
+    {
+        await  GetPeliculasCoincidentes(value);
+        StateHasChanged();
+
+    }
+
+
+    void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
+    {
+    }
+
+    void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+    }
+
+    protected async Task GetPeliculasCoincidentes(String query)
+    {
+        
+        peliculasCoincidentes = await peliculasService.GetPeliculasSearchApi(query);
+    }
+
+    void PageChanged(PagerEventArgs args)
+    {
+
+    }
+
+
+    void AsociarPelicula(PeliculaApiDto pel)
+    {
+        pelicula.ExternalId = pel.id;
+        pelicula.Titulo = pel.original_title;
+        pelicula.Descripcion = pel.overview;
+        pelicula.PuntuacionPromedio = pel.vote_average;
+        valoracion = (int)pel.vote_average;
+        pelicula.ImagenPath = pel.poster_path;
+        StateHasChanged();
+
+    }
+
+}
