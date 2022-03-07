@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DAL.Migrations
+namespace Cartelera.Data.Migrations
 {
     public partial class Initial : Migration
     {

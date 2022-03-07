@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using Cartelera.Data;
 
-namespace CarteleraApi.DTO
+namespace Cartelera.DTOs
 {
     public class Mapper : Profile
     {

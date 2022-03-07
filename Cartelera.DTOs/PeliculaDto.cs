@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CarteleraApi.DTO
+namespace Cartelera.DTOs
 {
     public class PeliculaDto
     {
@@ -11,7 +11,7 @@ namespace CarteleraApi.DTO
         [Required(ErrorMessage = "Campo obligatorio")]
         public string Titulo { get; set; }
 
-        [Required(ErrorMessage = "Campo obligatorio"),MaxLength(4000,ErrorMessage ="La {0} no puede exceder de {1} caracteres ")]
+        [Required(ErrorMessage = "Campo obligatorio"), MaxLength(4000, ErrorMessage = "La {0} no puede exceder de {1} caracteres ")]
         public string Descripcion { get; set; }
 
         public string ImagenPath { get; set; }

@@ -7,9 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteleraApi", "CarteleraAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteleraWeb", "CarteleraWeb\CarteleraWeb.csproj", "{FB7DBD50-1075-4F35-83A3-FC35A399A078}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarteleraLibrary", "CarteleraLibrary\CarteleraLibrary.csproj", "{A721777D-2CD5-43C1-8008-182545089A08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteleraDomainServices", "CarteleraLibrary\CarteleraDomainServices.csproj", "{A721777D-2CD5-43C1-8008-182545089A08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarteleraEscritorio", "CarteleraEscritorio\CarteleraEscritorio.csproj", "{1ADF6F0B-6BAC-4A01-8526-B34CEE49F914}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{FFC85C49-B907-409A-AFDF-DD4F84D5B23B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{B8780E54-C3FA-4982-B19F-BF1A78C79EF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartelera.DTOs", "Cartelera.DTOs\Cartelera.DTOs.csproj", "{A162BF5F-9E29-4639-A892-68911DE9E0F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartelera.Data", "Cartelera.Data\Cartelera.Data.csproj", "{2C714735-4961-4B22-850C-2F842C9674B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,13 +35,24 @@ Global
 		{A721777D-2CD5-43C1-8008-182545089A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A721777D-2CD5-43C1-8008-182545089A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A721777D-2CD5-43C1-8008-182545089A08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1ADF6F0B-6BAC-4A01-8526-B34CEE49F914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ADF6F0B-6BAC-4A01-8526-B34CEE49F914}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ADF6F0B-6BAC-4A01-8526-B34CEE49F914}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ADF6F0B-6BAC-4A01-8526-B34CEE49F914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A162BF5F-9E29-4639-A892-68911DE9E0F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A162BF5F-9E29-4639-A892-68911DE9E0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A162BF5F-9E29-4639-A892-68911DE9E0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A162BF5F-9E29-4639-A892-68911DE9E0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C714735-4961-4B22-850C-2F842C9674B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C714735-4961-4B22-850C-2F842C9674B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C714735-4961-4B22-850C-2F842C9674B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C714735-4961-4B22-850C-2F842C9674B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB86485B-2B9F-4F27-8338-CA6EDFBB37E7} = {FFC85C49-B907-409A-AFDF-DD4F84D5B23B}
+		{FB7DBD50-1075-4F35-83A3-FC35A399A078} = {B8780E54-C3FA-4982-B19F-BF1A78C79EF7}
+		{A721777D-2CD5-43C1-8008-182545089A08} = {FFC85C49-B907-409A-AFDF-DD4F84D5B23B}
+		{A162BF5F-9E29-4639-A892-68911DE9E0F6} = {FFC85C49-B907-409A-AFDF-DD4F84D5B23B}
+		{2C714735-4961-4B22-850C-2F842C9674B4} = {FFC85C49-B907-409A-AFDF-DD4F84D5B23B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22932388-F876-478A-BB6B-81E23996A4B3}

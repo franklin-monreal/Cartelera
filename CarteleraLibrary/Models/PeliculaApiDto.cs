@@ -1,4 +1,4 @@
-﻿namespace CarteleraLibrary.Models
+﻿namespace CarteleraDomainServices.Models
 {
     public class PeliculaApiDto
     {

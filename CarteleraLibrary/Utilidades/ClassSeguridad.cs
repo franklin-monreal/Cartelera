@@ -3,7 +3,7 @@ using System.Text;
 
 
 
-namespace CarteleraLibrary.Utilidades
+namespace CarteleraDomainServices.Utilidades
 {
     public class ClassSeguridad
     {

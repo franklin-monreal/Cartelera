@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CarteleraApi
+namespace Cartelera.Data
 {
     [Table("Peliculas")]
     public class Pelicula

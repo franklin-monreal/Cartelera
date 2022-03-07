@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CarteleraLibrary.Models
+namespace CarteleraDomainServices.Models
 {
     public class PeliculaDto
     {
